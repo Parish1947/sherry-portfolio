@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
+    
+    // Ensure mobile menu is closed on page load
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    if (hamburger && navMenu) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
 });
 
 window.addEventListener('load', () => {
@@ -21,6 +29,14 @@ window.addEventListener('load', () => {
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
+    
+    // Ensure mobile menu is closed on page load
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    if (hamburger && navMenu) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
 });
 
 // Prevent automatic scrolling to hash fragments
@@ -39,7 +55,8 @@ const skillItems = document.querySelectorAll('.skill-item');
 const contactItems = document.querySelectorAll('.contact-item');
 
 // Mobile Navigation Toggle
-hamburger.addEventListener('click', () => {
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
 });
@@ -50,6 +67,20 @@ navLinks.forEach(link => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
     });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
+});
+
+// Close mobile menu on scroll
+window.addEventListener('scroll', () => {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
 });
 
 // Smooth scrolling for navigation links
